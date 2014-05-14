@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://googledrive.com/host/0B9R58z9uTxy8OXl6dnZzeEJuc2M/Page1.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <style>
+		div{
+			border:1px solid;
+            border-radius:2px;
+			margin:2px;
+			background-color: rgb(240, 241, 194);
+		}
+		header{
+			text-align: center;
+			background-color: rgb(163, 154, 50);
+			color:white;
+		}
+		div.draggableblock > div:nth-child(even) {
+			background-color: rgb(180, 115, 115);
+		}
+		div.draggableblock > div:nth-child(odd) {
+			background-color: rgb(140, 185, 210);
+		}
+   </style>
+   <script>
+		function setDragData(eventObject){
+			eventObject.dataTransfer.setData("Text", eventObject.target.id)	
+		}
+		
+		//This is to allow the element to be dropped
+		function preventDefaultAction(event){
+			event.preventDefault();
+		}
+		
+		function stoppedDrag(event){
+			//It says not to follow the default browser drop behavior (Loading the url)
+			event.preventDefault();
+			var id = event.dataTransfer.getData("Text");
+			event.target.appendChild(document.getElementById(id));
+		}
+   </script>	
+<style type="text/css"></style></head>
+<body>
+	  <div>
+		  <header>Try Dragging and Dropping between the boxes</header>
+		  <div id="items" ondragover="preventDefaultAction(event)" ondrop="stoppedDrag(event)" style="float:left;width:30%;height:200px;" class="draggableblock">
+				<div class="draggableblock" id="One" draggable="true" ondragstart="setDragData(event)">One</div>
+				<div class="draggableblock" id="Two" draggable="true" ondragstart="setDragData(event)">Two</div>
+				<div class="draggableblock" id="Three" draggable="true" ondragstart="setDragData(event)">Three</div>
+		   </div>
+			<div id="mainContainer" class="draggableblock" draggable="true" ondragover="preventDefaultAction(event)" ondrop="stoppedDrag(event)" style="margin-left:auto;width:400px;height:200px">
+				
+			</div>
+		</div>
+</body></html>
